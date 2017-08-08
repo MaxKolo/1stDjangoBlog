@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% crispy formset helper %}
+
+{%block title%}Post{%endblock%}
+
+{%block content%}
+<h1>
+            {{post.title}}
+</h1>
+<article>
+    <header>
+        <p>
+            Posted on
+            <time datetime="{{post.created|date:'c'}}">
+                {{post.created|date}}
+            </time>
+        </p>
+    </header>
+    <p class="description">
+        {{post.description}}
+    </p>
+    {{post.content|safe}}
+</article>
+
+
+<h2>Post Comments</h2>
+
+{%for comment in comments%}
+<div class="comment">
+    <p>
+        
+            {{comment.author}}
+        
+    </p>
+    <p>{{comment.content}}</p>
+    </div>
+{%endfor%}
+       
+<h2> Add a comment </h2>
+<form method = "POST" >
+    {%csrf_token%}
+    {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} <br/>
+        {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit" value="submit" />
+</form>
+
+{%endblock%}
