@@ -1,7 +1,6 @@
 from django.forms import ModelForm, Textarea, HiddenInput
 from models import Comment
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+
 
 
 class commentForm(ModelForm):
